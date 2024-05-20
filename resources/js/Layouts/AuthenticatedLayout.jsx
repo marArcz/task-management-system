@@ -4,9 +4,11 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react'
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const { session } = usePage().props;
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -21,8 +23,14 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                <NavLink href={route('home')} active={route().current('home')}>
+                                    Home
+                                </NavLink>
+                                <NavLink href={route('teams.index')} active={route().current('teams.index')}>
+                                    Teams
+                                </NavLink>
+                                <NavLink href={route('projects.index')} active={route().current('projects.index')}>
+                                    Projects
                                 </NavLink>
                             </div>
                         </div>
@@ -92,7 +100,7 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        <ResponsiveNavLink href={route('home')} active={route().current('home')}>
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
@@ -119,7 +127,16 @@ export default function Authenticated({ user, header, children }) {
                 </header>
             )}
 
-            <main>{children}</main>
+            <main>
+                {session.success && (
+                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
+                        <div className="alert alert-success">
+                            {session.success}
+                        </div>
+                    </div>
+                )}
+                {children}
+            </main>
         </div>
     );
 }

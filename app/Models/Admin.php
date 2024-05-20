@@ -10,30 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
-    /*
-        Get User Role
-    */
-
-    protected $with = [
-        'role',
-        'team'
-    ];
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    //get the team the user belongs to
-    public function team(): BelongsTo
-    {
-        return $this->belongsTo(Team::class);
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -44,9 +24,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username',
-        'role_id',
-        'team_id'
     ];
 
     /**
