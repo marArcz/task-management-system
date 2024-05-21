@@ -15,7 +15,6 @@ class TeamProjectsController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $user->load(['team']);
         $projects = $user->team->projects()->get();
 
         return response()->json($projects);

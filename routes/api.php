@@ -48,5 +48,5 @@ Route::middleware(['auth:api', 'api'])->group(function () {
     Route::apiResource('team.members', TeamMembersController::class)->parameters([
         'member' => 'user'
     ]);
-    Route::resource('team.projects', TeamProjectsController::class)->only(['store']);
+    Route::resource('team.projects', TeamProjectsController::class)->only(['store','index']);
 });
