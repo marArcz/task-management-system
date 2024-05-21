@@ -38,7 +38,7 @@ Route::prefix('auth')->group(function () {
 
 
 Route::middleware(['auth:api', 'api'])->group(function () {
-    Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('project.tasks', TaskController::class)->shallow();
     Route::apiResource('teams', TeamController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('projects', ProjectController::class);

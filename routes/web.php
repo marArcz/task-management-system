@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users',UserController::class);
     Route::resource('projects',ProjectController::class);
-    Route::resource('tasks',TaskController::class);
+    Route::resource('team.tasks',TaskController::class)->shallow();
     Route::resource('teams',TeamController::class);
     Route::resource('team.members',TeamMembersController::class)->parameters([
         'member'=>'user'

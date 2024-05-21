@@ -19,14 +19,6 @@ class TeamController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return Inertia::render('Teams/Create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -54,14 +46,6 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         return response()->json($team);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Team $team)
-    {
-
     }
 
     /**
