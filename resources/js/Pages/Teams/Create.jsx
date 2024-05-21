@@ -25,7 +25,7 @@ const Create = ({ auth }) => {
             <Head title="Create Users" />
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-8">
                 <div className="text-end mb-3">
-                    <Link href={route('home')} className='btn btn-sm btn-danger'>Cancel</Link>
+                    <Link onClick={()=>history.back()}  className='btn btn-sm btn-danger'>Cancel</Link>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="mb-3">

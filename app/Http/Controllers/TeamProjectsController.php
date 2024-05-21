@@ -3,33 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ProjectController extends Controller
+class TeamProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $user = auth()->user();
+        $user->load(['team']);
+        $projects = $user->team->projects()->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return Inertia::render('Projects/Create');
+        return response()->json($projects);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Team $team)
     {
-        //
+        $project['title'] = $request->title;
+        $project['description'] = $request->description;
+        $project['start_date'] = $request->start_date;
+        $project['end_date'] = $request->end_date;
+
+        $team->projects()->create($project);
+
+        return response()->json($team);
     }
 
     /**
@@ -37,8 +41,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load(['tasks']);
-        return response()->json($project);
+        //
     }
 
 
@@ -54,7 +57,10 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return response()->json(['success'=>true]);
+        return response()->json([
+            'success'=>true,
+            'project'=>$project
+        ]);
 
     }
 

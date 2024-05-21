@@ -15,9 +15,7 @@ class TeamController extends Controller
     {
         $teams = Team::with(['created_by','members'])->get();
 
-        return Inertia::render('Teams/List',[
-            'teams' => $teams
-        ]);
+        return response()->json($teams);
     }
 
     /**
@@ -38,13 +36,16 @@ class TeamController extends Controller
         $name = $request->name;
         $description = $request->description;
 
-        Team::create([
+        $team = Team::create([
             'name' => $name,
             'description' => $description,
             'created_by_user_id' => $user->id,
         ]);
 
-        return redirect()->route('teams.index')->with('success','Successfully created a new team!');
+        return response()->json([
+            'success'=>true,
+            'team' => $team
+        ]);
     }
 
     /**
@@ -52,7 +53,7 @@ class TeamController extends Controller
      */
     public function show(Team $team)
     {
-        //
+        return response()->json($team);
     }
 
     /**
@@ -60,7 +61,7 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        //
+
     }
 
     /**
@@ -68,7 +69,18 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        //
+          $name = $request->name;
+          $description = $request->description;
+
+          $team->update([
+              'name' => $name,
+              'description' => $description,
+          ]);
+
+          return response()->json([
+              'success'=>true,
+              'team' => $team
+          ]);
     }
 
     /**
@@ -77,6 +89,6 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         $team->delete();
-        return redirect(route('teams.index'))->with('success','Successfully deleted team!');
+        return response()->json(['success'=>true]);
     }
 }

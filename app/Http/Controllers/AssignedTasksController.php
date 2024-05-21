@@ -2,27 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class AssignedTasksController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roles = Role::all();
-
-        return response()->json($roles);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $user = auth()->user();
+        return response()->json($user->tasks);
     }
 
     /**
@@ -36,15 +27,7 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role)
+    public function show(Task $task)
     {
         //
     }
@@ -52,7 +35,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Task $task)
     {
         //
     }
@@ -60,7 +43,7 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Role $role)
+    public function destroy(Task $task)
     {
         //
     }

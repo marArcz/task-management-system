@@ -18,7 +18,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -44,10 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
+        'api' => [
+            'driver'=>'jwt',
+            'provider'=>'users'
+        ]
     ],
 
     /*
@@ -68,10 +68,6 @@ return [
     */
 
     'providers' => [
-        'admins'=>[
-            'driver' => 'eloquent',
-            'model' => Admin::class
-        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => User::class
@@ -105,12 +101,6 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-        'admin' => [
-            'provider' => 'admins',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

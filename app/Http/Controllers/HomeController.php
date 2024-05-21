@@ -10,10 +10,13 @@ class HomeController extends Controller
 {
     //
 
-    public function index(){
-        $users = User::all();
+    public function index(Request $request){
+        $user = $request->user();
+        $user->load(['team']);
+        $projects = $user->team->projects()->get();
+
         return Inertia::render('Home',[
-            'users'=>$users,
+            'projects'=>$projects
         ]);
     }
 }

@@ -14,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Users/List');
+        $users = User::all();
+
+        return response()->json($users);
     }
 
     /**

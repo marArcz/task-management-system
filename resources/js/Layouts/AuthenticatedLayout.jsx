@@ -24,7 +24,7 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('home')} active={route().current('home')}>
-                                    Home
+                                    Dashboard
                                 </NavLink>
                                 <NavLink href={route('teams.index')} active={route().current('teams.index')}>
                                     Teams
@@ -129,9 +129,12 @@ export default function Authenticated({ user, header, children }) {
 
             <main>
                 {session.success && (
-                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
+                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4 pb-1">
                         <div className="alert alert-success">
-                            {session.success}
+                            <div className="flex">
+                                <span>{session.success}</span>
+                                <i className='ms-auto bx bxs-check'></i>
+                            </div>
                         </div>
                     </div>
                 )}

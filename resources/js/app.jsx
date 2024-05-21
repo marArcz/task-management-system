@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../css/app.css';
+import '../../node_modules/boxicons/css/boxicons.min.css';
 
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
